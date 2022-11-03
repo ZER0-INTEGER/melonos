@@ -26,6 +26,10 @@
   <div class="bottomicon" onclick="createWindowWeb('Minecraft 1.5.2','https://3kho.github.io/projects/minecraft/')">
     <img src="https://m.media-amazon.com/images/I/512dVKB22QL.png">
   </div>
+  <div class="bottomicon" onclick="createWindowWeb('Scratch 3.0','https://llk.github.io/scratch-gui/develop/')">
+    <img src="https://avatars.githubusercontent.com/u/3420800?s=200&v=4">
+  </div>
+  
 </div>
 <script>
 
@@ -211,12 +215,12 @@ function menustart(){
   createWindow("Clear Apps",[clearAppsButton])
   createWindow("Set Theme Color",[setThemeColorInput,setThemeColorButton])
 }
-updatesText=document.createElement("p").innerHTML="Welcome to MELON OS, this is built in JS."
+updatesText=document.createElement("p").innerHTML="Update: Added Scratch 3.0"
 forkText=document.createElement("a")
 forkText.setAttribute('href','https://github.com/ZER0-INTEGER/melonos')
 forkText.innerHTML="Fork on Github!"
 
-createWindow("Melon OS Updates",[updatesText,document.createElement('br'),forkText])
+createWindow("Melon OS Updates",[document.createElement("p").innerHTML="Welcome to MELON OS, this is built in JS.",document.createElement('br'),updatesText,document.createElement('br'),forkText])
 
 </script>
 <style>
@@ -240,6 +244,9 @@ body{
   bottom: 0px;
   position:fixed;
   display:flex;
+  border-top-right-radius:10px;
+  border-top-left-radius:10px;
+  overflow:hidden;
 }
 
 .menustart img{
@@ -284,7 +291,7 @@ body{
   margin:12px;
   margin-left:18px;
   margin-right:18px;
-  border-radius:2px;
+  border-radius:3px;
 }
 
 
