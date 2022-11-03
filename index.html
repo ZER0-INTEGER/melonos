@@ -20,7 +20,8 @@
     style="display: none">
     <ul>
         <li onclick="ide()"><a>New App</a></li>
-        <li onclick="notepad()"><a>New Document</a></li>
+        <li onclick="save()"><a>Save</a></li>
+        <li onclick="load()"><a>Load</a></li>
     </ul>
 </div>
 
@@ -31,9 +32,6 @@
   </div>
   <div class="bottomicon invert" onclick="ide()">
     <img src="https://img.icons8.com/material-outlined/512/code-file.png">
-  </div>
-  <div class="bottomicon invert" onclick="notepad()">
-    <img src="https://img.icons8.com/material-outlined/512/note.png">
   </div>
   <div class="bottomicon" onclick="createWindowWeb('Bing','https://www.bing.com/')">
     <img src="https://play-lh.googleusercontent.com/1WjAG6u7I3Uffur5QqeBIVF7SNWe8n4i14FPiZtC0goMIOSzJSNcFvvehJkqkD7xFxk">
@@ -58,6 +56,26 @@ function hideMenu() {
     document.getElementById(
         "contextMenu").style.display = "none"
 }
+
+if(localStorage.getItem('backgroundimage')===null){
+  localStorage.setItem('icons',icons.innerHTML)
+  localStorage.setItem('backgroundimage',document.body.style.backgroundImage)
+  localStorage.setItem('theme',document.querySelector(':root').style.getPropertyValue('--windowheader'))
+}
+
+function save(){
+  localStorage.setItem('icons',icons.innerHTML)
+  localStorage.setItem('backgroundimage',document.body.style.backgroundImage)
+  localStorage.setItem('theme',document.querySelector(':root').style.getPropertyValue('--windowheader'))
+}
+
+function load(){
+  icons.innerHTML=localStorage.getItem('icons')
+  document.body.style.backgroundImage=localStorage.getItem('backgroundcolor')
+  document.querySelector(':root').style.setProperty('--windowheader',localStorage.getItem('backgroundimage'))
+}
+
+load()
 
 function notepad(){
   textbox=document.createElement('textarea')
