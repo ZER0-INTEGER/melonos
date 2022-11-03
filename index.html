@@ -1,0 +1,350 @@
+<body>
+<div id="icons">
+  
+</div>
+<div class="icon" onclick="ide()">
+  <center><img src="https://img.icons8.com/material-outlined/344/document--v1.png">
+
+  <br><br><div><a>IDE</a></div>
+  </center>
+</div>
+
+<div class="icon" onclick="add()">
+  <center><img src="https://img.icons8.com/material-outlined/344/plus-2-math--v1.png">
+
+  <br><br><div><a>Add</a></div>
+  </center>
+</div>
+  
+
+<div id="windows">
+  
+</div>
+
+
+<div id="navbar">
+  <div class="menustart" onclick="menustart()">
+    <img>
+  </div>
+  <div class="bottomicon" onclick="createWindowWeb('Bing','https://www.bing.com/')">
+    <img src="https://play-lh.googleusercontent.com/1WjAG6u7I3Uffur5QqeBIVF7SNWe8n4i14FPiZtC0goMIOSzJSNcFvvehJkqkD7xFxk">
+  </div>
+  <div class="bottomicon" onclick="createWindowWeb('Minecraft 1.5.2','https://3kho.github.io/projects/minecraft/')">
+    <img src="https://m.media-amazon.com/images/I/512dVKB22QL.png">
+  </div>
+</div>
+<script>
+
+
+windowcount=0;
+
+function createWindow(name,list){
+  var div = document.createElement("div");
+  div.setAttribute("class","window")
+  div.setAttribute("id","window"+windowcount)
+  
+  var divheader = document.createElement("div");
+  divheader.setAttribute("class","windowheader")
+  divheader.setAttribute("id","window"+windowcount+"header")
+  divheader.innerHTML = name;
+  var divexit = document.createElement("img");
+  divexit.setAttribute("class","windowsheadericon")
+  divexit.setAttribute("src","https://img.icons8.com/material-rounded/344/cancel--v1.png");
+  divexit.setAttribute("onclick","this.parentElement.parentElement.remove();")
+  divheader.append(divexit)
+  div.appendChild(divheader)
+  
+  for (var i = 0; i < list.length; i++)   {
+  div.append(list[i])
+  
+  }
+  document.getElementById("windows").append(div)
+  
+  
+  dragElement(div);
+  windowcount+=1;
+}
+
+function createWindowWeb(name,link){
+  var div = document.createElement("div");
+  div.setAttribute("class","window")
+  div.setAttribute("id","window"+windowcount)
+  
+  var divheader = document.createElement("div");
+  divheader.setAttribute("class","windowheader")
+  divheader.setAttribute("id","window"+windowcount+"header")
+  divheader.innerHTML = name;
+  var divexit = document.createElement("img");
+  divexit.setAttribute("class","windowsheadericon")
+  divexit.setAttribute("src","https://img.icons8.com/material-rounded/344/cancel--v1.png");
+  divexit.setAttribute("onclick","this.parentElement.parentElement.remove();")
+  var iframe = document.createElement("iframe")
+  iframe.setAttribute("src",link)
+  divheader.append(divexit)
+  div.appendChild(divheader)
+  div.appendChild(iframe)
+  
+  document.getElementById("windows").appendChild(div);
+  dragElement(document.getElementById("window"+windowcount));
+  windowcount+=1;
+}
+
+
+
+
+
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    /* if present, the header is where you move the DIV from:*/
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    /* otherwise, move the DIV from anywhere inside the DIV:*/
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+function add(){
+  
+  name=prompt("Name of app")
+  if(name!=""){
+  icon=document.createElement("div")
+  icon.setAttribute("class","icon")
+  img=document.createElement("img")
+  img.setAttribute("src","https://img.icons8.com/material-outlined/344/program.png")
+  text=document.createElement("a")
+  text.innerHTML=name
+  center=document.createElement("center")
+  center.append(img)
+  center.append(document.createElement("br"))
+  center.append(document.createElement("br"))
+  textdiv=document.createElement("div")
+  textdiv.append(text)
+  center.append(textdiv)
+  icon.append(center)
+  js=prompt("Javascript of app")
+  icon.setAttribute("onclick","eval("+js+")")
+  document.getElementById("icons").append(icon)
+  }
+}
+
+function addicon(name,js){
+  
+  icon=document.createElement("div")
+  icon.setAttribute("class","icon")
+  img=document.createElement("img")
+  img.setAttribute("src",'https://img.icons8.com/material-outlined/344/program.png')
+  text=document.createElement("a")
+  text.innerHTML=name
+  center=document.createElement("center")
+  center.append(img)
+  center.append(document.createElement("br"))
+  center.append(document.createElement("br"))
+  textdiv=document.createElement("div")
+  textdiv.append(text)
+  center.append(textdiv)
+  icon.append(center)
+  icon.setAttribute("onclick","eval("+js+")")
+  document.getElementById("icons").append(icon)
+  
+}
+
+function ide(){
+  br=document.createElement("br")
+  setTitleText=document.createElement("p").innerHTML="Title:"
+  setTitleInput=document.createElement("input")
+  codeInput=document.createElement("input")
+  exportButton=document.createElement("button")
+  exportButton.innerHTML="Export"
+  exportButton.setAttribute("onclick","addicon(this.parentElement.children[1].value,this.parentElement.children[3].value)")
+  createWindow("Melon IDE",[setTitleText,setTitleInput,document.createElement("br"),codeInput,document.createElement("br"),exportButton])
+}
+
+function menustart(){
+  changeBackgroundText=document.createElement("p").innerHTML="Change Background"
+  br=document.createElement("br")
+  changeBackgroundInput=document.createElement("input")
+  changeBackgroundInput.value="https://iili.io/btCvgR.png"
+  changeBackgroundButton=document.createElement("button")
+  changeBackgroundButton.innerHTML="Set"
+  changeBackgroundButton.setAttribute("onclick","document.body.style.backgroundImage='url('+this.parentElement.children[2].value+')'")
+  
+  setThemeColorInput=document.createElement("input")
+  setThemeColorInput.value="#00d442"
+  setThemeColorButton=document.createElement("button")
+  setThemeColorButton.innerHTML="Set"
+  
+  
+  
+  setThemeColorButton.setAttribute("onclick","document.querySelector(':root').style.setProperty('--windowheader', this.parentElement.children[1].value);")
+  
+  clearAppsButton=document.createElement("button")
+  clearAppsButton.setAttribute("onclick","document.getElementById('icons').innerHTML=''")
+  clearAppsButton.innerHTML="Clear Apps"
+  
+  createWindow("Set Background",[changeBackgroundText,br,changeBackgroundInput,changeBackgroundButton])
+  createWindow("Clear Apps",[clearAppsButton])
+  createWindow("Set Theme Color",[setThemeColorInput,setThemeColorButton])
+}
+updatesText=document.createElement("p").innerHTML="Welcome to MELON OS, this is built in JS."
+forkText=document.createElement("a")
+forkText.setAttribute('href','https://github.com/ZER0-INTEGER/melonos')
+forkText.innerHTML="Fork on Github!"
+
+createWindow("Melon OS Updates",[updatesText,document.createElement('br'),forkText])
+
+</script>
+<style>
+:root{
+  --windowheader:#00d442;
+  
+}
+
+body{
+  background-image:url("https://iili.io/btCvgR.png");
+  background-repeat: no-repeat;
+  background-size:100%;
+  font-family:cambria;
+}
+
+#navbar{
+  width:100%;
+  height:50px;
+  background-color:#1c2a35;
+  left:0;
+  bottom: 0px;
+  position:fixed;
+  display:flex;
+}
+
+.menustart img{
+  width:25px;
+  height:25px;
+  margin:12px;
+  margin-left:18px;
+  margin-right:18px;
+  content:url(https://iili.io/bZOOkx.png);
+  filter:invert(1);
+}
+
+.menustart{
+  height:50px;
+  width:60px;
+  background-color:none;
+}
+.menustart:hover{
+  background-color:#323f49;
+}
+
+.menustart:hover img{
+  content:url(https://iili.io/bZPksj.png);
+  filter:invert(0);
+}
+
+
+.bottomicon{
+  height:50px;
+  width:60px;
+  background-color:none;
+}
+
+.bottomicon:hover{
+  background-color:#323f49;
+}
+
+
+.bottomicon img{
+  width:25px;
+  height:25px;
+  margin:12px;
+  margin-left:18px;
+  margin-right:18px;
+  border-radius:2px;
+}
+
+
+iframe{
+  width:800px;
+  height:600px;
+}
+
+.icon{
+  display: inline-block;
+  background:none;
+  border:2px solid rgba(66, 158, 245, 0);
+  padding-top:3px;
+  color:white;
+}
+
+.icon img{
+  width:45px;
+  height:45px;
+  border-radius:5px;
+}
+
+.icon div{
+  width:100%;
+  display:flex;
+  justify-content:center;
+}
+.icon:hover{
+  background: rgba(66, 158, 245, .3);
+  border:2px solid rgba(66, 158, 245, 1);
+}
+
+.window {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  text-align: center;
+  border: 1px solid #d3d3d3;
+}
+
+.windowheader {
+  padding: 3px;
+  z-index: 10;
+  background-color: var(--windowheader);
+  color: #fff;
+  display:flex;
+  align-items:center;
+ justify-content:center;
+}
+
+.windowsheadericon{
+  width:15px;
+  height:15px;
+  filter:invert(1);
+}
+</style>
+</body>
