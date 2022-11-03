@@ -57,7 +57,7 @@ function hideMenu() {
         "contextMenu").style.display = "none"
 }
 
-if(localStorage.getItem('backgroundimage')===null){
+if(localStorage.getItem('theme')===null){
   localStorage.setItem('icons',icons.innerHTML)
   localStorage.setItem('backgroundimage',document.body.style.backgroundImage)
   localStorage.setItem('theme',document.querySelector(':root').style.getPropertyValue('--windowheader'))
@@ -71,8 +71,8 @@ function save(){
 
 function load(){
   icons.innerHTML=localStorage.getItem('icons')
-  document.body.style.backgroundImage=localStorage.getItem('backgroundcolor')
-  document.querySelector(':root').style.setProperty('--windowheader',localStorage.getItem('backgroundimage'))
+  document.body.style.backgroundImage=localStorage.getItem('backgroundimage')
+  document.querySelector(':root').style.setProperty('--windowheader',localStorage.getItem('theme'))
 }
 
 load()
