@@ -2,23 +2,38 @@
 <div id="icons">
   
 </div>
+<!--
 <div class="icon" onclick="ide()">
   <center><img src="https://img.icons8.com/material-outlined/344/document--v1.png">
 
   <br><br><div><a>IDE</a></div>
   </center>
 </div>
-
+-->
   
 
 <div id="windows">
   
 </div>
 
+<div id="contextMenu" class="context-menu"
+    style="display: none">
+    <ul>
+        <li onclick="ide()"><a>New App</a></li>
+        <li onclick="notepad()"><a>New Document</a></li>
+    </ul>
+</div>
+
 
 <div id="navbar">
   <div class="menustart" onclick="menustart()">
     <img>
+  </div>
+  <div class="bottomicon invert" onclick="ide()">
+    <img src="https://img.icons8.com/material-outlined/512/code-file.png">
+  </div>
+  <div class="bottomicon invert" onclick="notepad()">
+    <img src="https://img.icons8.com/material-outlined/512/note.png">
   </div>
   <div class="bottomicon" onclick="createWindowWeb('Bing','https://www.bing.com/')">
     <img src="https://play-lh.googleusercontent.com/1WjAG6u7I3Uffur5QqeBIVF7SNWe8n4i14FPiZtC0goMIOSzJSNcFvvehJkqkD7xFxk">
@@ -35,6 +50,47 @@
 
 
 windowcount=0;
+
+document.onclick = hideMenu;
+document.oncontextmenu = rightClick;
+
+function hideMenu() {
+    document.getElementById(
+        "contextMenu").style.display = "none"
+}
+
+function notepad(){
+  textbox=document.createElement('textarea')
+  input=document.createElement('input')
+  button=document.createElement('button')
+  button.style.width="100%"
+  textbox.style.width="300px"
+  textbox.style.height="200px"
+  input.style.width="100%"
+  button.innerHTML="Save"
+  input.value="My File"
+  
+  button.setAttribute("onclick","adddoc(this.parentElement.children[1].value,this.parentElement.children[5].value)")
+  
+  createWindow("Notepad",[input,document.createElement('br'),button,document.createElement('br'),textbox])
+}
+
+
+function rightClick(e) {
+    e.preventDefault();
+
+    if (document.getElementById(
+        "contextMenu").style.display == "block")
+        hideMenu();
+    else {
+        var menu = document
+            .getElementById("contextMenu")
+              
+        menu.style.display = 'block';
+        menu.style.left = e.pageX + "px";
+        menu.style.top = e.pageY + "px";
+    }
+}
 
 function createWindow(name,list){
   var div = document.createElement("div");
@@ -133,14 +189,15 @@ function dragElement(elmnt) {
   }
 }
 
-function add(){
+function adddoc(name,text){
+  VALUE=document.createElement("textarea")
+  VALUE.value=text
+  VALUE.style.display="none"
   
-  name=prompt("Name of app")
-  if(name!=""){
   icon=document.createElement("div")
-  icon.setAttribute("class","icon")
+  icon.setAttribute("class","icon invert")
   img=document.createElement("img")
-  img.setAttribute("src","https://img.icons8.com/material-outlined/344/program.png")
+  img.setAttribute("src",'https://img.icons8.com/material-outlined/512/document.png')
   text=document.createElement("a")
   text.innerHTML=name
   center=document.createElement("center")
@@ -151,16 +208,16 @@ function add(){
   textdiv.append(text)
   center.append(textdiv)
   icon.append(center)
-  js=prompt("Javascript of app")
-  icon.setAttribute("onclick","eval("+js+")")
+  icon.append(VALUE)
+  icon.setAttribute("onclick","alert(this.getElementsByTagName('textarea')[0].value)")
   document.getElementById("icons").append(icon)
-  }
+  
 }
 
-function addicon(name,js){
+function addapp(name,js){
   
   icon=document.createElement("div")
-  icon.setAttribute("class","icon")
+  icon.setAttribute("class","icon invert")
   img=document.createElement("img")
   img.setAttribute("src",'https://img.icons8.com/material-outlined/344/program.png')
   text=document.createElement("a")
@@ -185,7 +242,10 @@ function ide(){
   codeInput=document.createElement("input")
   exportButton=document.createElement("button")
   exportButton.innerHTML="Export"
-  exportButton.setAttribute("onclick","addicon(this.parentElement.children[1].value,this.parentElement.children[3].value)")
+  exportButton.setAttribute("onclick","addapp(this.parentElement.children[1].value,this.parentElement.children[3].value)")
+  
+  
+  
   createWindow("Melon IDE",[setTitleText,setTitleInput,document.createElement("br"),codeInput,document.createElement("br"),exportButton])
 }
 
@@ -215,7 +275,7 @@ function menustart(){
   createWindow("Clear Apps",[clearAppsButton])
   createWindow("Set Theme Color",[setThemeColorInput,setThemeColorButton])
 }
-updatesText=document.createElement("p").innerHTML="Update: Added Scratch 3.0"
+updatesText=document.createElement("p").innerHTML=":NOV 2 2022: Update: Added Scratch 3.0|:NOV 3 2022: Update:Created Notpad and Basic Files"
 forkText=document.createElement("a")
 forkText.setAttribute('href','https://github.com/ZER0-INTEGER/melonos')
 forkText.innerHTML="Fork on Github!"
@@ -305,7 +365,6 @@ iframe{
   background:none;
   border:2px solid rgba(66, 158, 245, 0);
   padding-top:3px;
-  color:white;
 }
 
 .icon img{
@@ -347,5 +406,41 @@ iframe{
   height:15px;
   filter:invert(1);
 }
+
+.context-menu {
+  position: absolute;
+  text-align: center;
+  background-color: var(--windowheader);
+  border: 1px solid black;
+  font-size:13px;
+}
+
+.context-menu ul {
+  padding: 0px;
+  margin: 0px;
+  min-width: 130px;
+  list-style: none;
+}
+
+.context-menu ul li {
+  padding-bottom: 7px;
+  padding-top: 7px;
+  border: 1px solid black;
+}
+
+.context-menu ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+.context-menu ul li:hover {
+  background: var(--windowheader);
+  filter: brightness(120%);
+}
+
+.invert{
+  filter:invert(1);
+}
+
 </style>
 </body>
